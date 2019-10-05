@@ -25,8 +25,7 @@ sh 'mvn clean verify'
 }
  stage('Dependency Check') {
       steps {
-          sh 'mvn org.owasp:dependency-check-maven:check
-               -Dformat=XML -DdataDirectory=/usr/share/nvd -DautoUpdate=false'
+          sh 'mvn org.owasp:dependency-check-maven:check -Dformat=XML -DdataDirectory=/usr/share/nvd -DautoUpdate=false'
           step([$class: 'DependencyCheckPublisher', unstableTotalAll: '0'])
         }
       }
