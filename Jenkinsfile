@@ -32,5 +32,12 @@ sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
 }
 }
 }
+ stage('Dependency Check') {
+      steps {
+          sh 'mvn org.owasp:dependency-check-maven:check
+               -Dformat=XML -DdataDirectory=/usr/share/nvd -DautoUpdate=false'
+          step([$class: 'DependencyCheckPublisher', unstableTotalAll: '0'])
+        }
+      }
 }
 }
